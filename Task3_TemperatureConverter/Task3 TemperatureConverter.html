@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        
+            <h1>Enter Temperature</h1>
+            <div class="form-group">
+            <label for="temperature">Enter Temperature</label>
+            <input type="text" id="temperature" placeholder="0">
+            </div>
+            <div class="form-group">
+                <label for="scale">Choose Unit</label>
+                <select id="scale">
+                    <option value="F">Fahrenheit (°F)</option>
+                    <option value="C" >Celsius(°C)</option>
+                </select> 
+            </div>
+            <button id="convertBtn">Convert →</button>
+            
+        <div id="result"></div>
+    </div>
+    <script>
+        // Get references to HTML elements
+const temperatureInput = document.getElementById('temperature');
+const unitSelect = document.getElementById('scale');
+const convertBtn = document.getElementById('convertBtn');
+const resultDiv = document.getElementById('result');
+
+// Function to convert temperature
+function convertTemperature() {
+    const temp = parseFloat(temperatureInput.value);
+    const unit = unitSelect.value;
+
+    // Error handling
+    if (isNaN(temp)) {
+        resultDiv.innerHTML = 'Please enter a valid number.';
+        return;
+    }
+
+    let convertedTemp;
+    if (unit === 'C') {
+        // Convert Celsius to Fahrenheit
+        convertedTemp = (temp * 9/5) + 32;
+    } else {
+        // Convert Fahrenheit to Celsius
+        convertedTemp = (temp - 32) * 5/9;
+    }
+
+    resultDiv.innerHTML = `Converted Temperature: ${convertedTemp.toFixed(2)}°${unit === 'C' ? 'F' : 'C'}`;
+}
+
+// Add event listener for the Convert button
+convertBtn.addEventListener('click', convertTemperature);
+      </script>
+</body>
+</html>
